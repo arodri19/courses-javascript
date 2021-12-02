@@ -1,0 +1,25 @@
+version: '3.7'
+services:
+  stock-trader:
+    container_name: stock-trader
+    build:
+      dockerfile: docker/vue.dockerfile
+      context: .
+    image: andrerq/stock-trader
+    container_name: stock-trader
+    #working_dir: /app
+    environment:
+      CHOKIDAR_USEPOLLING: "true"
+    volumes:
+      - '.:/app'
+      - '/app/node_modules'
+    ports:
+      - '8080:8080'
+    networks: 
+      - production-network
+    #command: "npm i"
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+networks: 
+  production-network:
+    driver: bridge
