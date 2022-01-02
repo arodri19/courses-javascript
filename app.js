@@ -10,4 +10,8 @@ app.use(
   })
 );
 
+app.use(
+  bodyParser.json()
+)
+
 module.exports = app;

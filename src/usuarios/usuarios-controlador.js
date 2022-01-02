@@ -1,69 +1,83 @@
 const Usuario = require('./usuarios-modelo');
-const { InvalidArgumentError, InternalServerError } = require('../erros');
-const jwt = require('jsonwebtoken')
-const blacklist = require('../../redis/manipula-blacklist')
+const { InvalidArgumentError } = require('../erros');
 
-function criaTokenJWT(usuario){
-  const payload = {
-    id: usuario.id
-  };
+const tokens = require('./tokens')
+const {EmailVerificacao} = require('./emails')
 
-  const token = jwt.sign(payload, process.env.CHAVE_JWT, { expiresIn: '15m'});
-  return token
-
+function geraEndereco(rota, token){
+  const baseURL = process.env.BASE_URL
+  return `${baseURL}${rota}${token}`
 }
 
+
 module.exports = {
-  adiciona: async (req, res) => {
+  async adiciona(req, res) {
     const { nome, email, senha } = req.body;
 
     try {
       const usuario = new Usuario({
         nome,
-        email
+        email,
+        emailVerificado: false
       });
 
       await usuario.adicionaSenha(senha);
-
       await usuario.adiciona();
+
+      const token = tokens.verificacaoEmail.cria(usuario.id);
+      const endereco = geraEndereco('/usuario/verifica_email/',token)
+      const emailVerificacao = new EmailVerificacao(usuario, endereco);
+      emailVerificacao.enviaEmail().catch(console.log)
 
       res.status(201).json();
     } catch (erro) {
       if (erro instanceof InvalidArgumentError) {
         res.status(422).json({ erro: erro.message });
-      } else if (erro instanceof InternalServerError) {
-        res.status(500).json({ erro: erro.message });
       } else {
         res.status(500).json({ erro: erro.message });
       }
     }
   },
 
-  login: (req, res) =>{
-
-    const token = criaTokenJWT(req.user);
-    res.set('Authorization',token);
-    res.status(204).send();
-  },
-
-  logout: async (req, res) => {
+  async login (req, res){
 
     try {
-      const token = req.token;
-      await blacklist.adiciona(token);
-      res.status(204).send()
+      const accessToken = tokens.access.cria(req.user.id);
+      const refreshToken = await tokens.refresh.cria(req.user.id);
+      res.set('Authorization', accessToken);
+      res.status(200).send({refreshToken});
     } catch (error) {
       res.status(500).json({erro: error.message})
     }
 
   },
 
-  lista: async (req, res) => {
+  async logout(req, res) {
+    try {
+      const token = req.token;
+      await tokens.access.invalida(token);
+      res.status(204).send();
+    } catch (erro) {
+      res.status(500).json({ erro: erro.message });
+    }
+  },
+
+  async lista(req, res) {
     const usuarios = await Usuario.lista();
     res.json(usuarios);
   },
 
-  deleta: async (req, res) => {
+  async verificaEmail(req, res){
+    try {
+      const usuario = req.user
+      await usuario.verificaEmail()
+      res.status(200).json()
+    } catch (error) {
+      res.status(500).json({erro:error.message})  
+    }
+  },
+
+  async deleta(req, res) {
     const usuario = await Usuario.buscaPorId(req.params.id);
     try {
       await usuario.deleta();
