@@ -1,21 +1,33 @@
 const usuariosDao = require('./usuarios-dao');
-const { InvalidArgumentError } = require('../erros');
+const { InvalidArgumentError,NaoEncontrado } = require('../erros');
 const validacoes = require('../validacoes-comuns');
 const bcrypt = require('bcrypt');
 
+/**
+ * A classe Usuario é responsável por gerenciar todas as operações relacionadas a usuários
+ */
 class Usuario {
+
+  /**
+   * O contrutor recebe os dados de um usuário e os atribui a instancia atual
+   * @param {object} usuario 
+   */
   constructor(usuario) {
     this.id = usuario.id;
     this.nome = usuario.nome;
     this.email = usuario.email;
     this.senhaHash = usuario.senhaHash;
     this.emailVerificado = usuario.emailVerificado
+    this.cargo = usuario.cargo
 
     this.valida();
   }
 
+  /**
+   * @throws {InvalidArgumentError} - Esse erro ocorre quando um usuário com o mesmo email já está cadastrado
+   */
   async adiciona() {
-    if (await Usuario.buscaPorEmail(this.email)) {
+    if (await usuariosDao.buscaPorEmail(this.email)) {
       throw new InvalidArgumentError('O usuário já existe!');
     }
 
@@ -32,9 +44,19 @@ class Usuario {
     this.senhaHash = await Usuario.gerarSenhaHash(senha);
   }
 
+  atualizarSenha(){
+    return usuariosDao.atualizarSenha(this.senhaHash, this.id)
+  }
+
   valida() {
     validacoes.campoStringNaoNulo(this.nome, 'nome');
     validacoes.campoStringNaoNulo(this.email, 'email');
+    validacoes.campoStringNaoNulo(this.cargo, 'cargo');
+    const cargosValidos = ['admin','editor','assinante']
+
+    if(cargosValidos.indexOf(this.cargo) === -1){
+      throw InvalidArgumentError(`O campo cargo está invalido`)
+    }
   }
 
   async verificaEmail(){
@@ -49,7 +71,7 @@ class Usuario {
   static async buscaPorId(id) {
     const usuario = await usuariosDao.buscaPorId(id);
     if (!usuario) {
-      return null;
+      throw new NaoEncontrado('usuario')
     }
 
     return new Usuario(usuario);
@@ -58,7 +80,7 @@ class Usuario {
   static async buscaPorEmail(email) {
     const usuario = await usuariosDao.buscaPorEmail(email);
     if (!usuario) {
-      return null;
+      throw new NaoEncontrado('usuario')
     }
 
     return new Usuario(usuario);

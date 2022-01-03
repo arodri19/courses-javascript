@@ -7,11 +7,11 @@ const tokens = require('./tokens')
 
 
 const Usuario = require('./usuarios-modelo');
-const { InvalidArgumentError } = require('../erros')
+const { NaoAutorizado } = require('../erros')
 
 function verificaUsuario(usuario) {
     if (!usuario) {
-        throw new InvalidArgumentError('Não existe usuário com esse email');
+        throw new NaoAutorizado();
     }
 }
 
@@ -20,7 +20,7 @@ function verificaUsuario(usuario) {
 async function verificaSenha(senha, senhaHash) {
     const senhaValida = await bcrypt.compare(senha, senhaHash)
     if (!senhaValida) {
-        throw new InvalidArgumentError('E-mail ou senha inválidos')
+        throw new NaoAutorizado()
     }
 }
 
