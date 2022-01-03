@@ -6,19 +6,13 @@ const tokens = require("./tokens")
 module.exports = {
     local (req, res, next) {
         passport.authenticate('local', { session: false }, (error, usuario, info) => {
-            if (error && error.name === 'InvalidArgumentError') {
-                return res.status(401).json({ erro: error.message })
-            }
 
-            if (error) {
-                return res.status(500).json({ erro: error.message });
-            }
-
-            if (!usuario) {
-                return res.status(401).json()
+            if(error){
+                return next(error)
             }
 
             req.user = usuario;
+            req.estaAutenticado = true
             return next()
         })(req, res, next)
     },
@@ -28,25 +22,14 @@ module.exports = {
             { session: false },
             (error, usuario, info) => {
 
-                if(error && error.name === 'JsonWebTokenError'){
-                    return res.status(401).json({erro: error.message});
-                }
-
-                if(error && error.name === 'TokenExpiredError'){
-                    return res.status(401).json({erro: error.message, expiradoEm: error.expiredAt});
-                }
-
                 if(error){
-                    return res.status(500).json({erro: error.message});
-                }
-
-                if(!usuario){
-                    return res.status(401).json();
+                    return next(error)
                 }
 
                 req.token = info.token;
 
                 req.user = usuario;
+                req.estaAutenticado = true
                 return next()
             }
         )(req, res, next)
@@ -60,10 +43,8 @@ module.exports = {
             return next();
             
         } catch (error) {
-            if(error.name === 'InvalidArgumentError'){
-                return res.status(401).json({erro: error.message})
-            }
-            return res.status(500).json({erro: error.message})
+            return next(error)
+
         }
 
     },
@@ -75,16 +56,7 @@ module.exports = {
             req.user = usuario;
             next();
         } catch (error) {
-            if(error.name === 'JsonWebTokenError'){
-                return res.status(401).json({erro: error.message})
-            }
-            if(error.name === 'TokenExpiredError'){
-                return res.status(401).json({
-                    erro: error.message, expiradoEm: error.expiredAt
-                })
-            }
-
-            return res.status(500).json({erro: error.message})
+            next(error)
         }
 
         
