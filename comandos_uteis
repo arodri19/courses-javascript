@@ -1,0 +1,6 @@
+git config --global core.editor code
+git config --global --edit
+
+git log --pertty=format:'%C(blue)%h %d%s - %cn, %cr'
+
+git log --pertty=format:'%C(blue)%h %C(red)%d%C(white)%s - %C(cyan)%cn, %C(green)%cr'
