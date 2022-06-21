@@ -8,7 +8,7 @@ describe('Account Mongo Repository', () => {
     //   useUnifiedTopology: true
     // }
     // await MongoClient.connect(global.__MONGO_URI__, options)
-    await MongoHelper.connect(global.__MONGO_URI__)
+    await MongoHelper.connect(process.env.MONGO_URL)
   })
 
   afterAll(async () => {
