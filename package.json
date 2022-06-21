@@ -11,7 +11,7 @@
     "test:integration": "npm test -- --watch -c jest-integration-config.js",
     "test:staged": "npm test -- --findRelatedTests",
     "test:ci": "npm test -- --coverage",
-    "fixer":"eslint --fix --ext .ts ."
+    "fixer": "eslint --fix --ext .ts ."
   },
   "keywords": [],
   "author": "",
@@ -44,6 +44,7 @@
   "dependencies": {
     "bcrypt": "^5.0.1",
     "express": "^4.18.1",
+    "fast-glob": "^3.2.11",
     "mongodb": "^4.5.0",
     "validator": "^13.7.0"
   }
