@@ -19,6 +19,7 @@ export class LoginController implements Controller {
     }
     const isValid = this.emailValidator.isValid(email)
     if (!isValid) {
+      console.log('teste')
       return new Promise(resolve => resolve(badRequest(new InvalidParamError('email'))))
     }
   }
