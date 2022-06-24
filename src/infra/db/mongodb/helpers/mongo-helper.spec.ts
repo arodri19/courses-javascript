@@ -8,7 +8,7 @@ describe('Mongo Helper', () => {
     await sut.disconnect()
   })
   test('Should connect if mongodb is down', async () => {
-    const accountCollection = sut.getCollection('accounts')
+    const accountCollection = await sut.getCollection('accounts')
     expect(accountCollection).toBeTruthy()
   })
 })
