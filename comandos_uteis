@@ -7,3 +7,8 @@ git log --pretty=format:'%C(blue)%h %d%s - %cn, %cr'
 s = !git status -s
 c = !git add --all && git commit -m
 l = !git log --pretty=format:'%C(blue)%h %C(red)%d %C(white)%s - %C(cyan)%cn, %C(green)%cr'
+
+[push]
+	followTags = true
+
+git tag -a "1.0.0" -m "1.0.0"
