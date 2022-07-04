@@ -3,7 +3,13 @@ module.exports = {
   collectCoverage: true,
   collectCoverageFrom: [
     '<rootDir>/src/**/*.ts',
-    '!<rootDir>/src/main/**'
+    '!<rootDir>/src/main/**',
+    '!<rootDir>/src/**/*protocols.ts',
+    '!<rootDir>/src/**/*protocols/index.ts',
+    '!<rootDir>/src/**/*utils/email-validator.ts'
+  ],
+  testPathIgnorePatterns : [
+    "<rootDir>/node_modules/"
   ],
   coverageDirectory: 'coverage',
   testEnvironment: 'node',
