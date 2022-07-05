@@ -10,7 +10,7 @@ import { BcryptAdapter } from '../../../infra/criptography/crypter-adapter/bcryp
 import { JwtAdapter } from '../../../infra/criptography/jwt-adapter/jwt-adapter'
 
 export const makeLoginController = (): Controller => {
-  const salt = 2
+  const salt = 12
   const bcryptAdapter = new BcryptAdapter(salt)
   const jwtAdapter = new JwtAdapter(env.jwtSecret)
   const accountMongoRepository = new AccountMongoRepository()
