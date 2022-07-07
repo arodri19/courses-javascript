@@ -12,3 +12,5 @@ l = !git log --pretty=format:'%C(blue)%h %C(red)%d %C(white)%s - %C(cyan)%cn, %C
 	followTags = true
 
 git tag -a "1.0.0" -m "1.0.0"
+
+git remote rename heroku p
