@@ -18,3 +18,7 @@ git remote rename heroku p
 docker build -t clean-node-api .
 
 docker run -it clean-node-api sh
+
+git l
+git reset id
+git HEAD~1
