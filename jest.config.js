@@ -6,10 +6,11 @@ module.exports = {
     '!<rootDir>/src/main/**',
     '!<rootDir>/src/**/*protocols.ts',
     '!<rootDir>/src/**/*protocols/index.ts',
-    '!<rootDir>/src/**/*utils/email-validator.ts'
+    '!<rootDir>/src/**/*utils/email-validator.ts',
+    '!**/test/**'
   ],
-  testPathIgnorePatterns : [
-    "<rootDir>/node_modules/"
+  testPathIgnorePatterns: [
+    '<rootDir>/node_modules/'
   ],
   coverageDirectory: 'coverage',
   testEnvironment: 'node',
