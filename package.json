@@ -18,7 +18,8 @@
     "test:staged": "npm test -- --findRelatedTests",
     "test:ci": "npm test -- --coverage",
     "fixer": "eslint --fix --ext .ts .",
-    "jest:clr": "jest --clearCache"
+    "jest:clr": "jest --clearCache",
+    "watch": "tsc --watch"
   },
   "keywords": [],
   "author": "",
