@@ -24,8 +24,9 @@ const makeSurvey = async (): Promise<SurveyModel> => {
     ],
     date: new Date()
   })
-  const data = ((await surveyCollection.findOne({ _id: res.insertedId })) as unknown) as SurveyModel
-  return data
+  // const data = ((await surveyCollection.findOne({ _id: res.insertedId })) as unknown) as SurveyModel
+  const data = await surveyCollection.findOne({ _id: res.insertedId })
+  return MongoHelper.map(data)
 }
 
 const makeAccount = async (): Promise<AccountModel> => {
@@ -34,8 +35,9 @@ const makeAccount = async (): Promise<AccountModel> => {
     email: 'any_email@mail.com',
     password: 'password'
   })
-  const data = ((await accountCollection.findOne({ _id: res.insertedId })) as unknown) as AccountModel
-  return data
+  // const data = ((await accountCollection.findOne({ _id: res.insertedId })) as unknown) as AccountModel
+  const data = await accountCollection.findOne({ _id: res.insertedId })
+  return MongoHelper.map(data)
 }
 
 describe('Survey Mongo Repository', () => {
@@ -69,15 +71,17 @@ describe('Survey Mongo Repository', () => {
       })
 
       expect(surveyResult).toBeTruthy()
-      expect(surveyResult.id).toBeTruthy()
-      expect(surveyResult.answer).toBe(survey.answers[0].answer)
+      expect(surveyResult.surveyId).toEqual(survey.id)
+      expect(surveyResult.answers[0].answer).toBe(survey.answers[0].answer)
+      expect(surveyResult.answers[0].count).toBe(1)
+      expect(surveyResult.answers[0].percent).toBe(100)
     })
     test('Should update survey result if its not new', async () => {
       const survey = await makeSurvey()
       const account = await makeAccount()
-      const res = await surveyResultCollection.insertOne({
-        surveyId: survey.id,
-        accountId: account.id,
+      await surveyResultCollection.insertOne({
+        surveyId: MongoHelper.objectId(survey.id),
+        accountId: MongoHelper.objectId(account.id),
         answer: survey.answers[0].answer,
         date: new Date()
       })
@@ -90,8 +94,10 @@ describe('Survey Mongo Repository', () => {
       })
 
       expect(surveyResult).toBeTruthy()
-      expect(surveyResult.id).toEqual(res.insertedId)
-      expect(surveyResult.answer).toBe(survey.answers[1].answer)
+      expect(surveyResult.surveyId).toEqual(survey.id)
+      expect(surveyResult.answers[0].answer).toBe(survey.answers[1].answer)
+      expect(surveyResult.answers[0].count).toBe(1)
+      expect(surveyResult.answers[0].percent).toBe(100)
     })
   })
 })
