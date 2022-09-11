@@ -5,6 +5,7 @@ import { mockLoadSurveyById } from '@/presentation/test'
 import { mockLoadSurveyResult } from '@/presentation/test/mock-survey-result'
 import { LoadSurveyResultController } from './load-survey-result-controller'
 import { HttpRequest, LoadSurveyById, LoadSurveyResult } from './load-survey-result-controller-protocols'
+import MockDate from 'mockdate'
 
 const mockRequest = (): HttpRequest => ({
   params: {
@@ -30,6 +31,13 @@ const makeSut = (): SutTypes => {
 }
 
 describe('LoadSurveyResult Controller', () => {
+  beforeAll(() => {
+    MockDate.set(new Date())
+  })
+
+  afterAll(() => {
+    MockDate.reset()
+  })
   test('Should call LoadSurveyByid with correct value', async () => {
     const { sut, loadSurveyByIdStub } = makeSut()
 
