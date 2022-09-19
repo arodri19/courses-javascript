@@ -8,6 +8,7 @@ import MockDate from 'mockdate'
 import faker from 'faker'
 
 const mockRequest = (): HttpRequest => ({
+  accountId: faker.datatype.uuid(),
   params: {
     surveyId: faker.datatype.uuid()
   }
@@ -58,11 +59,12 @@ describe('LoadSurveyResult Controller', () => {
     const httpResponse = await sut.handle(mockRequest())
     expect(httpResponse).toEqual(serverError(new Error()))
   })
-  test('Should call LoadSurveyByid with correct value', async () => {
+  test('Should call LoadSurveyByid with correct values', async () => {
     const { sut, loadSurveyResultSpy } = makeSut()
     const httpRequest = mockRequest()
     await sut.handle(httpRequest)
     expect(loadSurveyResultSpy.surveyId).toBe(httpRequest.params.surveyId)
+    expect(loadSurveyResultSpy.accountId).toBe(httpRequest.accountId)
   })
   test('Should return 500 if LoadSurveyByid throws', async () => {
     const { sut, loadSurveyResultSpy } = makeSut()
