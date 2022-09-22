@@ -1,0 +1,15 @@
+import { SurveyResultModel } from '@/domain/models/'
+
+export type SaveSurveyResultParams = {
+  surveyId: string
+  accountId: string
+  answer: string
+  date: Date
+}
+
+export interface SaveSurveyResult {
+  save: (data: SaveSurveyResultParams) => Promise<SurveyResultModel>
+}
+
+// Modelo de classe de banco de dados - AccountModel
+// AddAccountModel - especifico desta interface
