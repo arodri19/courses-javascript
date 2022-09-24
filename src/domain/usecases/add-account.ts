@@ -1,9 +1,14 @@
-import { AccountModel } from '@/domain/models/'
+export interface AddAccount {
+  add: (account: AddAccount.Params) => Promise<AddAccount.Result>
+}
 
-export type AddAccountParams = Omit<AccountModel, 'id'>
-
-export type AddAccount = {
-  add: (account: AddAccountParams) => Promise<AccountModel>
+export namespace AddAccount {
+  export type Params = {
+    name: string
+    email: string
+    password: string
+  }
+  export type Result = boolean
 }
 
 // Modelo de classe de banco de dados - AccountModel
