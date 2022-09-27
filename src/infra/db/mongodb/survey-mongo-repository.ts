@@ -1,9 +1,9 @@
-import { LoadSurveysRepository, AddSurveyRepository, LoadSurveyByIdRepository } from '@/data/protocols/'
+import { LoadSurveysRepository, AddSurveyRepository, LoadSurveyByIdRepository, CheckSurveyByIdRepository } from '@/data/protocols/'
 import { SurveyModel } from '@/domain/models/'
 import { MongoHelper, QueryBuilder } from '@/infra/db/mongodb/'
 import { ObjectId } from 'mongodb'
 
-export class SurveyMongoRepository implements AddSurveyRepository, LoadSurveysRepository, LoadSurveyByIdRepository {
+export class SurveyMongoRepository implements AddSurveyRepository, LoadSurveysRepository, LoadSurveyByIdRepository, CheckSurveyByIdRepository {
   async add (data: AddSurveyRepository.Params): Promise<void> {
     const surveyCollection = await MongoHelper.getCollection('surveys')
     await surveyCollection.insertOne(data)
@@ -50,5 +50,19 @@ export class SurveyMongoRepository implements AddSurveyRepository, LoadSurveysRe
     // const survey: SurveyModel = ((await surveyCollection.findOne({ _id: MongoHelper.objectId(id) })) as unknown) as SurveyModel
     // const survey: SurveyModel = ((await surveyCollection.findOne({_id: {$toObjectId: id}})) as unknown) as SurveyModel
     return survey && MongoHelper.map(survey)
+  }
+
+  async checkById (id: string): Promise<CheckSurveyByIdRepository.Result> {
+    const surveyCollection = await MongoHelper.getCollection('surveys')
+    const survey = await surveyCollection.findOne({
+      _id: MongoHelper.objectId(id)
+    }, {
+      projection: {
+        _id: 1
+      }
+    })
+    // const survey: SurveyModel = ((await surveyCollection.findOne({ _id: MongoHelper.objectId(id) })) as unknown) as SurveyModel
+    // const survey: SurveyModel = ((await surveyCollection.findOne({_id: {$toObjectId: id}})) as unknown) as SurveyModel
+    return survey != null
   }
 }
