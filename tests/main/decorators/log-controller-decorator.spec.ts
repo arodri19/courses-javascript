@@ -3,10 +3,9 @@ import { LogControllerDecorator } from '@/main/docorators/'
 import { serverError, ok } from '@/presentation/helpers/http/'
 import { LogErrorRepositorySpy } from '@/tests/data/mocks'
 import faker from 'faker'
-import { mockAccountModel } from '@/tests/domain/mocks'
 
 class ControllerSpy implements Controller {
-  httpResponse = ok(mockAccountModel())
+  httpResponse = ok(faker.datatype.uuid())
   request: any
 
   async handle (request: any): Promise<HttpResponse> {

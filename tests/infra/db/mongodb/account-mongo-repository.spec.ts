@@ -33,12 +33,8 @@ describe('AccountMongoRepository', () => {
     test('Should return an account on add success', async () => {
       const sut = makeSut()
       const addAccountParams = mockAddAccountParams()
-      const account = await sut.add(addAccountParams)
-      expect(account).toBeTruthy()
-      expect(account.id).toBeTruthy()
-      expect(account.name).toBe(addAccountParams.name)
-      expect(account.email).toBe(addAccountParams.email)
-      expect(account.password).toBe(addAccountParams.password)
+      const isValid = await sut.add(addAccountParams)
+      expect(isValid).toBeTruthy()
     })
   })
 
@@ -51,7 +47,6 @@ describe('AccountMongoRepository', () => {
       expect(account).toBeTruthy()
       expect(account.id).toBeTruthy()
       expect(account.name).toBe(addAccountParams.name)
-      expect(account.email).toBe(addAccountParams.email)
       expect(account.password).toBe(addAccountParams.password)
     })
 
@@ -81,13 +76,13 @@ describe('AccountMongoRepository', () => {
     let name = faker.name.findName()
     let email = faker.internet.email()
     let password = faker.internet.password()
-    let accessToken = faker.random.uuid()
+    let accessToken = faker.datatype.uuid()
 
     beforeEach(() => {
       name = faker.name.findName()
       email = faker.internet.email()
       password = faker.internet.password()
-      accessToken = faker.random.uuid()
+      accessToken = faker.datatype.uuid()
     })
 
     test('Should return an account on loadByToken without role', async () => {
