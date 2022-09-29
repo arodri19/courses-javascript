@@ -83,6 +83,29 @@ describe('SurveyMongoRepository', () => {
       expect(survey).toBeTruthy()
       expect(survey.id).toBeTruthy()
     })
+    test('Should return null if survey does not exists', async () => {
+      const id = String(new ObjectId())
+      const sut = makeSut()
+      const survey = await sut.loadById(id)
+      expect(survey).toBeFalsy()
+    })
+  })
+  describe('loadAnswers()', () => {
+    test('Should load answers on success', async () => {
+      const survey = mockAddSurveyParams()
+      const res = await surveyCollection.insertOne(survey)
+
+      const id = String(res.insertedId)
+      const sut = makeSut()
+      const answers = await sut.loadAnswers(id)
+      expect(answers).toEqual([survey.answers[0].answer,survey.answers[1].answer])
+    })
+    test('Should return empty array if survey does not exists', async () => {
+      const id = String(new ObjectId())
+      const sut = makeSut()
+      const answers = await sut.loadAnswers(id)
+      expect(answers).toEqual([])
+    })
   })
   describe('checkById()', () => {
     test('Should return true if survey exists', async () => {
