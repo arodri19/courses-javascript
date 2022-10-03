@@ -8,4 +8,5 @@
 //   resolvers,
 //   typeDefs,
 //   schemaDirectives
+//   context: ({ req }) => ({ req })
 // })
