@@ -1,7 +1,7 @@
 import { DbLoadAnswersBySurvey } from '@/data/usecases/'
 import { throwError } from '@/tests/domain/mocks'
 import { LoadAnswersBySurveyRepositorySpy } from '@/tests/data/mocks'
-import faker from 'faker'
+import { faker } from '@faker-js/faker'
 import MockDate from 'mockdate'
 
 type SutTypes = {

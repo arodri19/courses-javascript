@@ -2,7 +2,7 @@ import { Controller, HttpResponse } from '@/presentation/protocols'
 import { LogControllerDecorator } from '@/main/docorators/'
 import { serverError, ok } from '@/presentation/helpers/http/'
 import { LogErrorRepositorySpy } from '@/tests/data/mocks'
-import faker from 'faker'
+import { faker } from '@faker-js/faker'
 
 class ControllerSpy implements Controller {
   httpResponse = ok(faker.datatype.uuid())

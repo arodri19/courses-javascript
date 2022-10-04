@@ -4,7 +4,7 @@ import { forbidden, ok, serverError } from '@/presentation/helpers/http/'
 import { CheckSurveyByIdSpy, LoadSurveyResultSpy } from '@/tests/presentation/mocks'
 import { LoadSurveyResultController } from '@/presentation/controllers/load-survey-result-controller'
 import MockDate from 'mockdate'
-import faker from 'faker'
+import { faker } from '@faker-js/faker'
 
 const mockRequest = (): LoadSurveyResultController.Request => ({
   accountId: faker.datatype.uuid(),

@@ -1,5 +1,5 @@
 import { LoadAccountByEmailRepository, LoadAccountByTokenRepository, UpdateAccessTokenRepository, AddAccountRepository, CheckAccountByEmailRepository } from '@/data/protocols/'
-import faker from 'faker'
+import { faker } from '@faker-js/faker'
 
 export class AddAccountRepositorySpy implements AddAccountRepository {
   result = true

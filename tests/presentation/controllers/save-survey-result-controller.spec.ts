@@ -3,7 +3,7 @@ import { forbidden, ok, serverError } from '@/presentation/helpers/http/http-hel
 import { SaveSurveyResultController } from '@/presentation/controllers'
 import { throwError } from '@/tests/domain/mocks'
 import { SaveSurveyResultSpy, LoadAnswersBySurveySpy } from '@/tests/presentation/mocks'
-import faker from 'faker'
+import { faker } from '@faker-js/faker'
 import MockDate from 'mockdate'
 
 const mockRequest = (answer: string = null): SaveSurveyResultController.Request => ({

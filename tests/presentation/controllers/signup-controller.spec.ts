@@ -3,7 +3,7 @@ import { EmailInUseError, MissingParamError, ServerError } from '@/presentation/
 import { ok, serverError, badRequest, forbidden } from '@/presentation/helpers/http/http-helper'
 import { throwError } from '@/tests/domain/mocks'
 import { AuthenticationSpy, ValidationSpy, AddAccountSpy } from '@/tests/presentation/mocks'
-import faker from 'faker'
+import { faker } from '@faker-js/faker'
 
 // const makeEmailValidatorWithError = (): EmailValidator => {
 //   // stub => retorno fixo tipo de teste

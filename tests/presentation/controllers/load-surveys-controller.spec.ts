@@ -2,7 +2,7 @@ import { LoadSurveysController } from '@/presentation/controllers/load-surveys-c
 import { noContent, ok, serverError } from '@/presentation/helpers/http/'
 import { throwError } from '@/tests/domain/mocks'
 import { LoadSurveysSpy } from '@/tests/presentation/mocks'
-import faker from 'faker'
+import { faker } from '@faker-js/faker'
 import MockDate from 'mockdate'
 
 const mockRequest = (): LoadSurveysController.Request => ({ accountId: faker.datatype.uuid() })

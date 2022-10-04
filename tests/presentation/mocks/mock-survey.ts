@@ -1,7 +1,7 @@
 import { SurveyModel } from '@/domain/models/survey'
 import { mockSurveyModels } from '@/tests/domain/mocks'
 import { LoadSurveys, AddSurvey, CheckSurveyById, LoadAnswersBySurvey } from '@/domain/usecases/'
-import faker from 'faker'
+import { faker } from '@faker-js/faker'
 
 export class AddSurveySpy implements AddSurvey {
   addSurveyParams: AddSurvey.Params

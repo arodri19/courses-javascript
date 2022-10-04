@@ -1,7 +1,7 @@
 import { Collection } from 'mongodb'
 import { MongoHelper } from '@/infra/db/mongodb/'
 import { LogMongoRepository } from '@/infra/db/mongodb/log-mongo-repository'
-import faker from 'faker'
+import { faker } from '@faker-js/faker'
 
 const makeSut = (): LogMongoRepository => {
   return new LogMongoRepository()
