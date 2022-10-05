@@ -74,6 +74,7 @@ describe('Survey GraphQL', () => {
         }],
         date: now
       })
+
       const res = await request(app)
         .post('/graphql')
         .set('x-access-token', accessToken)

@@ -22,7 +22,8 @@
     "test:ci": "npm test -- --coverage",
     "fixer": "eslint --fix --ext .ts .",
     "jest:clr": "jest --clearCache",
-    "watch": "tsc --watch"
+    "watch": "tsc --watch",
+    "lint-staged": "lint-staged"
   },
   "keywords": [],
   "author": "",
