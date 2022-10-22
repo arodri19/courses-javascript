@@ -1,0 +1,26 @@
+{
+  "name": "projeto-alura-parte3-node-api-petshop",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --inspect ./api/index.js",
+    "banco": "nodemon --inspect ./api/banco-de-dados/criarTabelas.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.1",
+    "config": "^3.3.6",
+    "express": "^4.17.2",
+    "helmet": "^4.6.0",
+    "jsontoxml": "^1.0.1",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.12.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
