@@ -104,7 +104,7 @@ node_modules
 dist
 coverage
 data
-!src/data
-!tests/data
+!node/udemy/projeto-tdd/src/data
+!node/udemy/projeto-tdd/tests/data
 .vscode
 globalConfig.json
