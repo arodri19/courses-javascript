@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+        "outDir": "dist",
+        "module": "CommonJS",
+        "target": "ES2020",
+        "esModuleInterop": true,
+        // "allowJs": true,
+        "strictNullChecks": false,
+        "sourceMap": true,
+        "rootDirs": ["src", "tests"],
+        "baseUrl": "src",
+        "paths": {
+            "@/tests/*": ["../tests/*"],
+            "@/*": ["*"]
+        }
+    },
+    "include": [
+        "src",
+        "tests"
+    ],
+    "exclude": [
+    ]
+}

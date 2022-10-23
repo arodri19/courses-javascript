@@ -1,0 +1,24 @@
+git config --global core.editor code
+git config --global --edit
+
+git log --pretty=format:'%C(blue)%h %d%s - %cn, %cr'
+
+[alias]
+s = !git status -s
+c = !git add --all && git commit -m
+l = !git log --pretty=format:'%C(blue)%h %C(red)%d %C(white)%s - %C(cyan)%cn, %C(green)%cr'
+
+[push]
+	followTags = true
+
+git tag -a "1.0.0" -m "1.0.0"
+
+git remote rename heroku p
+
+docker build -t clean-node-api .
+
+docker run -it clean-node-api sh
+
+git l
+git reset id
+git HEAD~1
