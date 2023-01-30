@@ -6,6 +6,7 @@ export default function Inicio() {
   pratosRecomendados = pratosRecomendados.sort(() => 0.5 - Math.random()).splice(0,3);
   return (
     <section>
+      
       <h3>
         Recomendações da cozinha
       </h3>
