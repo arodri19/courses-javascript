@@ -22,40 +22,42 @@ const AdministracaoRestaurantes = () => {
     }
     
     return (
-        <TableContainer component={Paper}>
-            <Table>
-                <TableHead>
-                    <TableRow>
-                        <TableCell>
-                            Nome
-                        </TableCell>
-                        <TableCell>
-                            Editar
-                        </TableCell>
-                        <TableCell>
-                            Excluir
-                        </TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {restaurantes.map(restaurante => 
-                        <TableRow key={restaurante.id}>
+        <>
+            <TableContainer component={Paper}>
+                <Table>
+                    <TableHead>
+                        <TableRow>
                             <TableCell>
-                                {restaurante.nome}
+                                Nome
                             </TableCell>
                             <TableCell>
-                                [ <Link to={`/admin/restaurantes/${restaurante.id}`}>editar</Link> ]
+                                Editar
                             </TableCell>
                             <TableCell>
-                                <Button variant="outlined" color="error" onClick={() => excluir(restaurante)}>
-                                    Excluir
-                                </Button>
+                                Excluir
                             </TableCell>
-                        </TableRow>    
-                    )}
-                </TableBody>
-            </Table>
-        </TableContainer>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {restaurantes.map(restaurante => 
+                            <TableRow key={restaurante.id}>
+                                <TableCell>
+                                    {restaurante.nome}
+                                </TableCell>
+                                <TableCell>
+                                    [ <Link to={`/admin/restaurantes/${restaurante.id}`}>editar</Link> ]
+                                </TableCell>
+                                <TableCell>
+                                    <Button variant="outlined" color="error" onClick={() => excluir(restaurante)}>
+                                        Excluir
+                                    </Button>
+                                </TableCell>
+                            </TableRow>    
+                        )}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+        </>
     )
 }
 
