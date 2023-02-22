@@ -4,10 +4,6 @@ import { useParams } from "react-router";
 import http from "../../../http";
 import IRestaurante from "../../../interfaces/IRestaurante";
 
-import { Link as RouterLink } from 'react-router-dom'
-
-
-
 const FormularioRestaurante = () => {
 
     const parametros = useParams();
