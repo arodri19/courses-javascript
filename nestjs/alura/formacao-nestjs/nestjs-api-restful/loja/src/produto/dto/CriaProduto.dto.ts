@@ -7,9 +7,9 @@ import {
   ArrayMinSize,
   IsNumber,
   IsUUID,
+  IsUrl,
+  IsString,
 } from 'class-validator';
-import { CaracteristicaProdutoDTO } from './CaracteristicaProduto.dto';
-import { ImagemProdutoDTO } from './ImagemProduto.dto';
 import { Type } from 'class-transformer';
 
 export class CriaProdutoDTO {
@@ -48,3 +48,23 @@ export class CriaProdutoDTO {
   @IsNotEmpty({ message: 'A categoria não pode ser vazia' })
   categoria: string;
 }
+
+export class ImagemProdutoDTO {
+  @IsUrl(undefined, { message: 'URL para imagem inválida' })
+  url: string;
+
+  @IsString()
+  @IsNotEmpty({ message: 'Descrição da imagem não pode ser vazia' })
+  descricao: string;
+}
+
+export class CaracteristicaProdutoDTO {
+  @IsString()
+  @IsNotEmpty({ message: 'Nome da cadasterística não pode ser vazio' })
+  nome: string;
+
+  @IsString()
+  @IsNotEmpty({ message: 'Descrição da característica não pode ser vazio' })
+  descricao: string;
+}
+
