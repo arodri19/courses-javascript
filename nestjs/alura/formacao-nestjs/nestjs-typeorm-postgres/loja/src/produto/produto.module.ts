@@ -1,11 +1,13 @@
 import { Module } from '@nestjs/common';
 import { ProdutoController } from './produto.controller';
 import { ProdutoRepository } from './produto.repository';
-import { UsuarioRepository } from 'src/usuario/usuario.repository';
-import { BuscaUsuarioId } from 'src/usuario/validacao/busca-usuairo-id.validator';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { ProdutoEntity } from './produto.entity';
+import { ProdutoService } from './produto.service';
 
 @Module({
+  imports: [TypeOrmModule.forFeature([ProdutoEntity])],
   controllers: [ProdutoController],
-  providers: [ProdutoRepository, UsuarioRepository, BuscaUsuarioId],
+  providers: [ProdutoRepository, ProdutoService],
 })
 export class ProdutoModule {}

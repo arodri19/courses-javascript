@@ -1,13 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { ProdutoEntity } from './produto.entity';
-import { UsuarioRepository } from 'src/usuario/usuario.repository';
 
 @Injectable()
 export class ProdutoRepository {
   private produtos: ProdutoEntity[] = [];
 
   constructor(
-    private readonly usuarioRepository: UsuarioRepository
   ) { }
 
   salva(dadosProduto: ProdutoEntity) {
