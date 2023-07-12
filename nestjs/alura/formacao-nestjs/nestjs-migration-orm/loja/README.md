@@ -77,9 +77,18 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
   ```bash
   $ npx typeorm-ts-node-esm -d src/db/data-source-cli.ts migration:show
 
-  $ npm run typeorm migration:generate src/migrations/cria-tabelas
+  $ npx typeorm-ts-node-esm -d src/db/data-source-cli.ts migration:generate src/migrations/cria-tabelas
+  $ npm run typeorm migration:generate src/db/migrations/cria-tabelas
+  $ npm run typeorm migration:generate src/db/migrations/mapeando-usuario-pedido
 
+  $ npx typeorm-ts-node-esm -d src/db/data-source-cli.ts migration:run
   $ npm run typeorm migration:run
 
+  $ npx typeorm-ts-node-esm -d src/db/data-source-cli.ts migration:revert
   $ npm run typeorm migration:revert
+  ```
+
+  Usar para gerar crud
+  ```bash
+  $ npx nest g resource pedido --no-spec
   ```
