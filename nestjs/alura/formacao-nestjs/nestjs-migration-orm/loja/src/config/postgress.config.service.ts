@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { TypeOrmOptionsFactory, TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { ItemPedidoEntity } from 'src/pedido/itempedido.entity';
 import { PedidoEntity } from 'src/pedido/pedido.entity';
 import { ProdutoCaracteristicaEntity } from 'src/produto/produto-caracteristica.entity';
 import { ProdutoImagemEntity } from 'src/produto/produto-imagem.entity';
@@ -27,6 +28,7 @@ export class PostgresConfigService implements TypeOrmOptionsFactory {
         ProdutoImagemEntity,
         ProdutoCaracteristicaEntity,
         PedidoEntity,
+        ItemPedidoEntity,
       ],
     };
   }

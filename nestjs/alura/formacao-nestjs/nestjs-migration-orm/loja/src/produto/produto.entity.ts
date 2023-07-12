@@ -9,6 +9,7 @@ import {
 } from 'typeorm';
 import { ProdutoCaracteristicaEntity } from './produto-caracteristica.entity';
 import { ProdutoImagemEntity } from './produto-imagem.entity';
+import { ItemPedidoEntity } from '../pedido/itempedido.entity';
 
 @Entity({ name: 'produtos' })
 export class ProdutoEntity {
@@ -46,6 +47,9 @@ export class ProdutoEntity {
     { cascade: true, eager: true },
   )
   imagens: ProdutoImagemEntity[];
+
+  @OneToMany(() => ItemPedidoEntity, (itemPedido) => itemPedido.produto)
+  itensPedido: ItemPedidoEntity[];
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: string;

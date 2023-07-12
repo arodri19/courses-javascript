@@ -6,7 +6,7 @@ import {
   registerDecorator,
 } from 'class-validator';
 import { Injectable } from '@nestjs/common';
-import { UsuarioRepository } from 'src/usuario/usuario.repository';
+import { UsuarioRepository } from '../usuario.repository';
 
 @Injectable()
 @ValidatorConstraint({ async: true })
@@ -23,7 +23,7 @@ export class BuscaUsuarioId implements ValidatorConstraintInterface {
 }
 
 export const UsuarioEhValido = (opcoesDeValidacao: ValidationOptions) => {
-  return (objeto: Object, propriedade: string) => {
+  return (objeto: object, propriedade: string) => {
     registerDecorator({
       target: objeto.constructor,
       propertyName: propriedade,
