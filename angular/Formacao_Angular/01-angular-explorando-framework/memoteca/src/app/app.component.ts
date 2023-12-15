@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { CabecalhoComponent } from './componentes/cabecalho/cabecalho.component';
@@ -13,10 +13,8 @@ import { ListarPensamentoComponent } from './componentes/pensamentos/listar-pens
   imports: [CommonModule, RouterOutlet, FormsModule, CriarPensamentoComponent, ListarPensamentoComponent, CabecalhoComponent, RodapeComponent, ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
+
 })
-export class AppComponent implements OnInit {
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
+export class AppComponent {
   title = 'memoteca';
 }
