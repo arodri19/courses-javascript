@@ -4,31 +4,36 @@
       "id": 1,
       "conteudo": "Que bom que você veio",
       "autoria": "Andre",
-      "modelo": "modelo1"
+      "modelo": "modelo1",
+      "favorito": false
     },
     {
       "id": 2,
       "conteudo": "Angular1",
       "autoria": "Andre",
-      "modelo": "modelo2"
+      "modelo": "modelo2",
+      "favorito": false
     },
     {
       "id": 3,
       "conteudo": "Angular2",
       "autoria": "Andre",
-      "modelo": "modelo3"
+      "modelo": "modelo3",
+      "favorito": true
     },
     {
       "id": 4,
       "conteudo": "Angular4",
       "autoria": "Andre2",
-      "modelo": "modelo3"
+      "modelo": "modelo3",
+      "favorito": true
     },
     {
+      "id": 5,
       "conteudo": "a",
       "autoria": "aaaa",
       "modelo": "modelo1",
-      "id": 5
+      "favorito": false
     }
   ]
 }
