@@ -12,6 +12,6 @@ import { RouterLink } from '@angular/router';
 export class BotaoCarregarMaisComponent implements OnInit {
   @Input() haMaisPensamentos: boolean = false;
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    // throw new Error('Method not implemented.');
   }
 }
