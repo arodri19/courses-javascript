@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DoCheck, OnInit } from '@angular/core';
 import { Item } from './interfaces/iItem';
 import { ListaDeCompraService } from './service/lista-de-compra.service';
 
@@ -7,7 +7,7 @@ import { ListaDeCompraService } from './service/lista-de-compra.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit, DoCheck{
   title = 'app-lista-de-compras';
   listaDeCompra!:Array<Item>;
   itemParaSerEditado!:Item;
@@ -15,6 +15,11 @@ export class AppComponent implements OnInit{
   constructor(
     private listaService: ListaDeCompraService
   ) { }
+
+  ngDoCheck(): void {
+    console.log('Verificando mudanças');
+    this.listaService.atualizarLocalStorage();
+  }
 
   ngOnInit(): void {
     //throw new Error('Method not implemented.');
