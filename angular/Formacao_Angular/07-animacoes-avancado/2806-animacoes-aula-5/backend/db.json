@@ -52,7 +52,7 @@
     {
       "id": 9,
       "descricao": "Fazer curso de animações",
-      "statusFinalizado": true,
+      "statusFinalizado": false,
       "categoria": "Estudos",
       "prioridade": "Alta"
     }
