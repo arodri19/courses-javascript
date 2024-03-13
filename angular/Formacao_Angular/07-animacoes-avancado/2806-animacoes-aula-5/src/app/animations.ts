@@ -44,11 +44,11 @@ export const checkButtonTrigger = trigger('checkButton', [
 
 export const filterTrigger = trigger('filterAnimation', [
   transition(':enter', [
-    style({opacity: 0, width: 0}),
+    style({ opacity: 0, width: 0 }),
     animate('400ms ease-out', keyframes([
-      style({offset: 0, opacity:0, width: 0}),
-      style({offset: 0.5, opacity:0.5, width: '*'}),
-      style({offset: 1, opacity:1, width: '*'}),
+      style({ offset: 0, opacity: 0, width: 0 }),
+      style({ offset: 0.5, opacity: 0.5, width: '*' }),
+      style({ offset: 1, opacity: 1, width: '*' }),
     ]))
   ]),
   transition(':leave', [
@@ -60,7 +60,7 @@ export const filterTrigger = trigger('filterAnimation', [
 ])
 
 export const formButtonTrigger = trigger('formButton', [
-  
+
   transition('invalid => valid', [
     query('#botao-salvar', [
       group([
@@ -123,3 +123,20 @@ export const flyInOutTrigger =
       ])
     ])
   ])
+
+export const shakeTrigger = trigger('shakeAnimation', [
+  transition('* => *', [
+    query('input.ng-invalid:focus, select.ng-invalid:focus', [
+      animate('0.5s', keyframes([
+        style({ border: '2px solid red' }),
+        style({ transform: 'translateX(-10px)' }),
+        style({ transform: 'translateX(10px)' }),
+        style({ transform: 'translateX(-10px)' }),
+        style({ transform: 'translateX(10px)' }),
+        style({ transform: 'translateX(-10px)' }),
+        style({ transform: 'translateX(10px)' }),
+        style({ transform: 'translateX(0px)' }),
+      ]))
+    ],{ optional: true})
+  ])
+])

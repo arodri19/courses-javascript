@@ -6,6 +6,7 @@
   </div>
   <form 
     @shownState
+    [@shakeAnimation]="formulario.value"
     [@formButton]="formulario.valid ? 'valid' : 'invalid'" 
     class="formulario ff-prompt"
     [formGroup]="formulario"
