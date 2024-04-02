@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 @Component({
   selector: 'app-contato',
@@ -15,7 +16,8 @@ export class ContatoComponent {
 
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private liveAnnoucer: LiveAnnouncer
   ) { }
 
   ngOnInit() {
@@ -31,6 +33,7 @@ export class ContatoComponent {
 
   onSubmit() {
     if(this.contatoForm.valid) {
+      this.liveAnnoucer.announce('Formulário enviado com sucesso!', 'polite');
       this.contatoForm.reset();
     }
   }
